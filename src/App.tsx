@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Suspense } from "react";
+import { BrowserRouter as Router, useRoutes } from "react-router-dom";
+import { routes } from "./routes";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { requestData } from "./modules/news";
+import { RootState } from "./modules/index";
 
-function App() {
+const Routes = () => {
+  return useRoutes(routes);
+};
+
+const App = () => {
+  const dispatch = useDispatch();
+  const sagaData = useSelector((state: RootState) => state.news);
+
+  useEffect(() => {
+    dispatch(requestData());
+    console.log(sagaData);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Router>
+      <Suspense>
+        <button
+          onClick={() => {
+            dispatch(requestData());
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          fetch
+        </button>
+        <Routes />
+      </Suspense>
+    </Router>
   );
-}
+};
 
 export default App;

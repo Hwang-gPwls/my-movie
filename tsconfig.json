@@ -1,11 +1,8 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "jsx": "preserve",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -17,10 +14,23 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "noEmit": true
+    // "baseUrl": "."
+    // "paths": {
+    //   "src/*": ["src/*"],
+    //   "components/*": ["src/components/*"],
+    //   "pages/*": ["src/pages/*"],
+    //   "hooks/*": ["src/hooks/*"],
+    //   "modules/*": ["src/modules/*"],
+    //   "assets/*": ["src/assets/*"],
+    //   "api/*": ["src/api/*"],
+    //   "public/*": ["src/public/*"],
+    //   "utils/*": ["src/utils/*"],
+    //   "lib/*": ["src/lib/*"],
+    //   "services/*": ["src/services/*"],
+    //   "styles/*": ["src/styles/*"],
+    //   "layouts/*": ["src/layouts/*"]
+    // }
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }
