@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import {
@@ -6,7 +6,7 @@ import {
   BsLayoutTextSidebarReverse,
 } from "react-icons/bs";
 
-const Menu = () => {
+const Footer = () => {
   const [isFocus, setIsFocus] = useState(false);
 
   return (
@@ -41,4 +41,4 @@ const Container = styled.div`
   }
 `;
 
-export default Menu;
+export default Footer;

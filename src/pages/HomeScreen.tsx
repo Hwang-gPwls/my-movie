@@ -1,30 +1,25 @@
-import Menu from "../components/Menu";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Layout from "layout/Layout";
 import { useSelector, useDispatch } from "react-redux";
-import { requestData } from "../modules/news";
-import { RootState } from "../modules/index";
+import { fetchNews } from "features/news/newsSlice";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
-  const sagaData = useSelector((state: RootState) => state.news);
-
-  useEffect(() => {
-    dispatch(requestData());
-    console.log(sagaData);
-  }, []);
+  const { entities, loading, error } = useSelector((state) => state.news);
 
   return (
-    <>
-      <button
-        onClick={() => {
-          dispatch(requestData());
-        }}
-      >
-        fetch
-      </button>
-      <div>{sagaData}</div>
-      <Menu />
-    </>
+    <Layout>
+      <h1>To do</h1>
+      <form>
+        <h1>Fetch user data</h1>
+        <button onClick={() => dispatch(fetchNews()).unwrap()}>
+          Get users
+        </button>
+        {entities?.length > 0 &&
+          entities.map((user) => <div key={user.id}>{user.name}</div>)}
+      </form>
+      <ul></ul>
+    </Layout>
   );
 };
 
