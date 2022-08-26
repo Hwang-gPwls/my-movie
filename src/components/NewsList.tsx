@@ -1,16 +1,8 @@
 import React, { useEffect } from "react";
-
-type News = {
-  slugName: string;
-  title: string;
-  byline: string;
-  source: string;
-  publishedDate: Date;
-  geoFacet: string;
-};
+import { News } from "features/news/types";
 
 const NewsList = ({
-  slugName,
+  slug_Name,
   title,
   byline,
   source,

@@ -7,14 +7,21 @@ export const fetchNews = createAsyncThunk("news/fetchNews", async () => {
   return response;
 });
 
+type EntitesType = {
+  status: string;
+  copyright: string;
+  num_results: number;
+  results: News[];
+};
+
 interface NewsState {
-  entities: News[];
+  entities: EntitesType;
   loading: "idle" | "pending" | "succeeded" | "failed";
   error: string | null;
 }
 
 const initialState: NewsState = {
-  entities: [],
+  entities: { status: "", copyright: "", num_results: 200, results: [] },
   loading: "idle",
   error: null,
 };
@@ -26,7 +33,9 @@ const newsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchNews.fulfilled, (state, action) => {
       state.loading = "idle";
-      state.entities.push(action.payload);
+      if (state.entities) {
+        state.entities = action.payload;
+      }
     });
   },
 });

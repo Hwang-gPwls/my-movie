@@ -1,10 +1,10 @@
 export type NewsId = string;
 
-export type News = {
-  slugName: NewsId;
+export interface News {
+  slug_Name: NewsId;
   title: string;
   byline: string;
   source: string;
   publishedDate: string;
   geoFacet: string;
-};
+}
