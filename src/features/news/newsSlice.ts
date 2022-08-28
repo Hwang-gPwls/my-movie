@@ -3,7 +3,7 @@ import { News } from "./types";
 import { restAuthTimesNews } from "api/news";
 
 export const fetchNews = createAsyncThunk("news/fetchNews", async () => {
-  const response = await restAuthTimesNews();
+  const response = await restAuthTimesNews(1);
   return response;
 });
 

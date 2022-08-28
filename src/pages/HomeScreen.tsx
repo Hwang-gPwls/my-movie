@@ -5,6 +5,7 @@ import { fetchNews } from "features/news/newsSlice";
 import { RootState } from "app/store";
 import { useAppDispatch } from "features/news/newsHooks";
 import NewsList from "components/NewsList";
+import styled from "styled-components";
 
 const HomeScreen = () => {
   const dispatch = useAppDispatch();
@@ -14,26 +15,28 @@ const HomeScreen = () => {
 
   useEffect(() => {
     dispatch(fetchNews()).unwrap();
-    console.log(entities.results[0].slug_Name);
+    console.log(entities.results.length);
   }, []);
 
   return (
     <Layout>
-      <h1>To do</h1>
-      <h1>Fetch user data</h1>
-      {entities && (
-        <NewsList
-          slug_Name={entities.results[0].slug_Name}
-          title={entities.results[0].title}
-          byline={entities.results[0].byline}
-          source={entities.results[0].source}
-          publishedDate={entities.results[0].publishedDate}
-          geoFacet={entities.results[0].geoFacet}
-        />
-      )}
-      <ul></ul>
+      <Container>
+        {entities &&
+          entities.results.map((result) => (
+            <NewsList
+              slug_name={result.slug_name}
+              title={result.title}
+              byline={result.byline}
+              source={result.source}
+              publishedDate={result.publishedDate}
+              geoFacet={result.geoFacet}
+            />
+          ))}
+      </Container>
     </Layout>
   );
 };
+
+const Container = styled.div``;
 
 export default HomeScreen;

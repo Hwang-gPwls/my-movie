@@ -1,10 +1,11 @@
 export type NewsId = string;
 
 export interface News {
-  slug_Name: NewsId;
+  slug_name: NewsId;
   title: string;
   byline: string;
   source: string;
   publishedDate: string;
   geoFacet: string;
+  multimedia?: [];
 }
