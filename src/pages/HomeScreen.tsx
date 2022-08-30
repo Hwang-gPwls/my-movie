@@ -53,8 +53,8 @@ const HomeScreen = () => {
 
   const { data, hasNextPage, isFetching, fetchNextPage } = useFetchNews();
 
-  const users = useMemo(
-    () => (data ? data.pages.flatMap(({ data }) => data.contents) : []),
+  const news = useMemo(
+    () => (data ? data.pages.flatMap(({ data }) => data.results) : []),
     [data],
   );
 
@@ -65,16 +65,16 @@ const HomeScreen = () => {
     }
   });
 
-  console.log(users);
+  console.log(data);
 
   return (
     <Layout>
       <Container>
-        {/* {users.map((user) => (
-          <div key={user.id} />
+        {news.map((news) => (
+          <div key={news.title}>{news.title}</div>
         ))}
-        {isFetching && <Loading />}
-        <Target ref={ref} /> */}
+        {/* {isFetching && <Loading />} */}
+        <Target ref={ref} />
       </Container>
     </Layout>
   );
