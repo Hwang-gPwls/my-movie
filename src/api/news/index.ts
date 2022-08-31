@@ -46,8 +46,10 @@ const useFetchNews = () =>
         params: { limit: 10, offset: pageParam },
       }),
     {
-      getNextPageParam: ({ data: { isLastPage, pageNumber } }) =>
-        isLastPage ? undefined : pageNumber + 1,
+      getNextPageParam: (lastPageData: any) => {
+        console.log(lastPageData.config.params.offset);
+        return lastPageData.config.params.offset + 1 || undefined;
+      },
     },
   );
 
