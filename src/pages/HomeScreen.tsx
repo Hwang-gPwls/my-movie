@@ -5,6 +5,9 @@ import { RootState } from "app/store";
 import { useAppDispatch } from "features/news/newsHooks";
 import NewsList from "components/NewsList";
 import styled from "styled-components";
+import restAuthTimesNews from "api/news";
+import { useInfiniteQuery, useQueryClient } from "react-query";
+import { useInView } from "react-intersection-observer";
 import useFetchNews from "api/news";
 //import useIntersect from "hooks/IntersectionObserver";
 
@@ -53,10 +56,12 @@ const HomeScreen = () => {
 
   const { data, hasNextPage, isFetching, fetchNextPage } = useFetchNews();
 
-  const news = useMemo(
+  const users = useMemo(
     () => (data ? data.pages.flatMap(({ data }) => data.results) : []),
     [data],
   );
+
+  console.log(data);
 
   const ref = useIntersect(async (entry: any, observer: any) => {
     observer.unobserve(entry.target);
@@ -65,13 +70,11 @@ const HomeScreen = () => {
     }
   });
 
-  console.log(data);
-
   return (
     <Layout>
       <Container>
-        {news.map((news) => (
-          <div key={news.title}>{news.title}</div>
+        {users.map((user) => (
+          <div key={user.id}>{user.title}</div>
         ))}
         {/* {isFetching && <Loading />} */}
         <Target ref={ref} />

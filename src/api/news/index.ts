@@ -4,16 +4,40 @@ import { News } from "features/news/types";
 import { useQuery, useInfiniteQuery, QueryFunctionContext } from "react-query";
 import { deflate } from "zlib";
 
+export interface PaginationResponse<T> {
+  results: T[];
+  pageNumber: number;
+  pageSize: number;
+  totalPages: number;
+  totalCount: number;
+  isLastPage: boolean;
+  isFirstPage: boolean;
+}
+
 // export const restAuthTimesNews = async (offset: number) => {
-//   try {
-//     const params = { limit: 10, offset: 0 };
-//     const response = await axios.get(`${API_ENDPOINT}`, {
+//    const params = { limit: 10, offset: 0 };
+//   return axios
+//   .get(`${API_ENDPOINT}`, {
+//     params,
+//   }
+//   .then((res) => {
+//     return res.data
+//   })
+// };
+
+// export const restAuthTimesNews = {
+//   fetchPostingsListWithScroll: async (pageParams: 0) => {
+//     const params = { limit: 10, offset: pageParams };
+//     const res = await axios.get(`${API_ENDPOINT}`, {
 //       params,
 //     });
-//     return response.data;
-//   } catch (err) {
-//     console.log(err);
-//   }
+
+//     return {
+//       posts: res.data,
+//       nextPage: pageParams + 1,
+//       isLast: res.data ? true : false,
+//     };
+//   },
 // };
 
 // export const restAuthTimesNews = useQuery("getTimesNews", () => {
@@ -41,13 +65,15 @@ const newsKeys = {
 const useFetchNews = () =>
   useInfiniteQuery(
     newsKeys.lists(),
-    ({ pageParam = 0 }: QueryFunctionContext) =>
+    ({ pageParam = 1 }: QueryFunctionContext) => {
       axios.get(`${API_ENDPOINT}`, {
-        params: { limit: 10, offset: pageParam },
-      }),
+        params: { page: pageParam },
+      });
+    },
     {
-      getNextPageParam: ({ data: { isLastPage, pageNumber } }) =>
-        isLastPage ? undefined : pageNumber + 1,
+      getNextPageParam: (lastPage: any, pages) => {
+        return lastPage.isLast ? undefined : lastPage.nextPage;
+      },
     },
   );
 
