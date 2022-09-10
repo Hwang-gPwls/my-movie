@@ -1,11 +1,10 @@
-export type NewsId = string;
+export type MovieId = number;
 
-export interface News {
-  slug_name: NewsId;
+export interface Movie {
+  id: MovieId;
   title: string;
-  byline: string;
-  source: string;
-  publishedDate: string;
-  geoFacet: string;
-  multimedia?: [];
+  originalTitle: string;
+  overView: string;
+  releaseDate: string;
+  voteAverage: string;
 }

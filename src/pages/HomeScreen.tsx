@@ -1,12 +1,8 @@
 import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import Layout from "layout/Layout";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "app/store";
-import { useAppDispatch } from "features/news/newsHooks";
-import NewsList from "components/NewsList";
+import Card from "components/Card";
 import styled from "styled-components";
-import useFetchNews from "api/news";
-//import useIntersect from "hooks/IntersectionObserver";
+import useFetchMovies from "api/news";
 
 const HomeScreen = () => {
   // const dispatch = useAppDispatch();
@@ -51,9 +47,10 @@ const HomeScreen = () => {
     return ref;
   };
 
-  const { data, hasNextPage, isFetching, fetchNextPage } = useFetchNews();
+  const { data, hasNextPage, isFetching, fetchNextPage } = useFetchMovies();
+  console.log(data);
 
-  const news = useMemo(
+  const movies = useMemo(
     () => (data ? data.pages.flatMap(({ data }) => data.results) : []),
     [data],
   );
@@ -65,13 +62,18 @@ const HomeScreen = () => {
     }
   });
 
-  console.log(data);
-
   return (
     <Layout>
       <Container>
-        {news.map((news) => (
-          <div key={news.title}>{news.title}</div>
+        {movies.map((movie) => (
+          <Card
+            id={movie.id}
+            title={movie.title}
+            originalTitle={movie.original_title}
+            overView={movie.overview}
+            releaseDate={movie.release_date}
+            voteAverage={movie.vote_average}
+          ></Card>
         ))}
         {/* {isFetching && <Loading />} */}
         <Target ref={ref} />

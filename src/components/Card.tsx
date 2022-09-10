@@ -1,19 +1,21 @@
 import React, { useEffect } from "react";
-import { News } from "features/news/types";
+import { Movie } from "features/news/types";
 import styled from "styled-components";
 
-const NewsList = ({
-  slug_name,
+const Card = ({
+  id,
   title,
-  byline,
-  source,
-  publishedDate,
-  geoFacet,
-  multimedia,
-}: News) => {
+  originalTitle,
+  overView,
+  releaseDate,
+  voteAverage,
+}: Movie) => {
   return (
-    <Container key={slug_name}>
+    <Container key={id}>
       <div className="title">{title}</div>
+      <div>{originalTitle}</div>
+      <div>{releaseDate}</div>
+      <div>{voteAverage}</div>
     </Container>
   );
 };
@@ -39,4 +41,4 @@ const Container = styled.div`
   }
 `;
 
-export default NewsList;
+export default Card;
