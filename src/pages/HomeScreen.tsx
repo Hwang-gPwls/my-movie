@@ -75,7 +75,10 @@ const HomeScreen = () => {
             originalTitle={movie.original_title}
             overView={movie.overview}
             releaseDate={movie.release_date}
+            originalLanguage={movie.original_language}
             voteAverage={movie.vote_average}
+            posterPath={movie.poster_path}
+            voteCount={movie.vote_count}
           ></Card>
         ))}
         {/* {isFetching && <Loading />} */}

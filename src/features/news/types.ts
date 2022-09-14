@@ -8,4 +8,7 @@ export interface Movie {
   overView: string;
   releaseDate: string;
   voteAverage: string;
+  originalLanguage: string;
+  posterPath: string;
+  voteCount: string;
 }
