@@ -1,15 +1,8 @@
 import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import Layout from "layout/Layout";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "app/store";
-import { useAppDispatch } from "features/news/newsHooks";
-import NewsList from "components/NewsList";
+import Card from "components/Card";
 import styled from "styled-components";
-import restAuthTimesNews from "api/news";
-import { useInfiniteQuery, useQueryClient } from "react-query";
-import { useInView } from "react-intersection-observer";
-import useFetchNews from "api/news";
-//import useIntersect from "hooks/IntersectionObserver";
+import useFetchMovies from "api/news";
 
 const HomeScreen = () => {
   // const dispatch = useAppDispatch();
@@ -54,9 +47,10 @@ const HomeScreen = () => {
     return ref;
   };
 
-  const { data, hasNextPage, isFetching, fetchNextPage } = useFetchNews();
+  const { data, hasNextPage, isFetching, fetchNextPage } = useFetchMovies();
+  console.log(data);
 
-  const users = useMemo(
+  const movies = useMemo(
     () => (data ? data.pages.flatMap(({ data }) => data.results) : []),
     [data],
   );
@@ -73,8 +67,16 @@ const HomeScreen = () => {
   return (
     <Layout>
       <Container>
-        {users.map((user) => (
-          <div key={user.id}>{user.title}</div>
+        {movies.map((movie) => (
+          <Card
+            id={movie.id}
+            title={movie.title}
+            backdropxPath={movie.backdrop_path}
+            originalTitle={movie.original_title}
+            overView={movie.overview}
+            releaseDate={movie.release_date}
+            voteAverage={movie.vote_average}
+          ></Card>
         ))}
         {/* {isFetching && <Loading />} */}
         <Target ref={ref} />
