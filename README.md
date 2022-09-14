@@ -1,6 +1,6 @@
-# NewYorkTimes_Article_Search
+# MyMovieList
 
-redux를 사용한 NewYork Times 기사 목록 조회 토이 프로젝트
+React Query를 사용한 무한 스크롤 영화 스크랩 기능 제공
 
 # 사용 기술 
 
