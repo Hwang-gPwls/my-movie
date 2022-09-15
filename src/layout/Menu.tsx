@@ -24,7 +24,7 @@ const Footer = () => {
 };
 
 const Container = styled.div`
-  height: 11vh;
+  height: 7vh;
   padding: 1rem 8rem;
   position: fixed;
   bottom: 0;

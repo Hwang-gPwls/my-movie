@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Movie } from "features/news/types";
 import styled from "styled-components";
+import { BsFillStarFill } from "react-icons/bs";
 
 const Card = ({
   id,
@@ -14,6 +15,8 @@ const Card = ({
   posterPath,
   voteCount,
 }: Movie) => {
+  const [isScrap, setIsScrap] = useState(false);
+
   return (
     <Container key={id}>
       <Main>
@@ -26,7 +29,21 @@ const Card = ({
             className="movie-img_cover"
             src={`https://image.tmdb.org/t/p/w780${posterPath}`}
           />
-          <i className="movie-img_fa-scrap"></i>
+          <div
+            className="movie-img_fa-scrap"
+            role="button"
+            onClick={() => setIsScrap(!isScrap)}
+          >
+            {isScrap ? (
+              <BsFillStarFill size="25" color="#f6ea8c" />
+            ) : (
+              <BsFillStarFill
+                size="25"
+                color="#fff"
+                style={{ stroke: "#7C7877", strokeWidth: "0.5" }}
+              />
+            )}
+          </div>
         </div>
         <h6 className="title">{title}</h6>
         <h6 className="original-title">{originalTitle}</h6>
@@ -48,7 +65,7 @@ const Card = ({
 };
 
 const Container = styled.div`
-  width: 60%;
+  width: 50%;
   box-sizing: border-box;
   transition: all 0.4s;
 
@@ -89,14 +106,13 @@ const Main = styled.div`
     &_fa-scrap {
       position: absolute;
       right: 28px;
-      bottom: -7px;
+      bottom: -3.2rem;
       width: 40px;
       height: 40px;
       text-align: center;
       line-height: 40px;
       font-size: 13px;
-      background-color: #dc2c29;
-      color: white;
+      background-color: transparent;
       border-radius: 60px;
     }
   }
@@ -121,7 +137,7 @@ const Main = styled.div`
     column-count: 4;
     height: 30px;
     width: 100%;
-    margin-top: 4rem;
+    margin-top: 3rem;
 
     &_head {
       color: rgba(0, 0, 0, 0.7);

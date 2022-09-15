@@ -13,6 +13,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     html{
         font-family: "Noto-Sans", sans-serif;
+        background-color: #D9D4CF;
         scroll-behavior: smooth;
         ${media.mobile}{
             font-size: 8px;
