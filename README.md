@@ -7,7 +7,7 @@ React Query를 사용한 무한 스크롤 영화 스크랩 기능 제공
 ## Frontend
 - Javascript(ES6) / HTML / CSS
 - React
-- Redux
+- React Query
 - styled-components
 - Typescript
 
